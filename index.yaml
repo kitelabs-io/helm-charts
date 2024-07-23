@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  base-service:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-07-23T10:53:21.926239379Z"
+    description: A Helm chart for Kubernetes
+    digest: 988e8cb55f4dbb2c92cebca7f6272865ccca1ec3c51478e44e97d50ff6ebe91d
+    name: base-service
+    type: application
+    urls:
+    - https://github.com/kitelabs-io/helm-charts/releases/download/base-service-0.1.6/base-service-0.1.6.tgz
+    version: 0.1.6
+generated: "2024-07-23T10:53:21.926245992Z"
