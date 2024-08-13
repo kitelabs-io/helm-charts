@@ -178,26 +178,5 @@ Return merged list of environment variables
 {{/*
 Define base-service workload
 */}}
-{{- define "base-service.workload" }}
-{{- if .Values.workload -}}
-{{ if .Values.workload.department -}}
-linker.kyber.network/workload.department: {{ .Values.workload.department | quote }}
-{{ end -}}
-{{ if .Values.workload.team -}}
-linker.kyber.network/workload.team: {{ .Values.workload.team | quote }}
-{{ end -}}
-{{ if .Values.workload.subteam -}}
-linker.kyber.network/workload.subteam: {{ .Values.workload.subteam | quote }}
-{{ end -}}
-{{ if .Values.workload.system -}}
-linker.kyber.network/workload.system: {{ .Values.workload.system | quote }}
-{{ end -}}
-{{ if .Values.workload.description -}}
-linker.kyber.network/workload.description: |
-  {{ .Values.workload.description }}
-{{ end -}}
-{{ if .Values.workload.owners -}}
-linker.kyber.network/workload.owners: {{ join "," .Values.workload.owners | quote }}
-{{ end -}}
 {{- end -}}
 {{- end }}
