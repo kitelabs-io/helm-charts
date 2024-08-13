@@ -174,9 +174,3 @@ Return merged list of environment variables
   {{- end }}
 {{- end }}
 {{- end }}
-
-{{/*
-Define base-service workload
-*/}}
-{{- end -}}
-{{- end }}
