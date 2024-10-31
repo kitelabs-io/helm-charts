@@ -1,0 +1,83 @@
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  # -- Repository to use for the cronjob
+  repository: ""
+  # -- Tag to use for the cronjob
+  tag: latest
+  # -- Image pull policy for the Trending soong manager
+  imagePullPolicy: IfNotPresent
+
+# -- If defined, uses a Secret to pull an image from a private Docker registry or repository
+imagePullSecrets: []
+
+# -- Datadog configuration
+datadog:
+  enabled: false
+  env: develop
+  service: ""
+  version: ""
+
+# -- Schedule in Cron format to execute job
+schedule: "* * * * *"
+
+# -- Number of successful finished jobs to retain
+historyLimit: 1
+
+# -- Number of retries before marking this job failed.
+backoffLimit: 6
+
+# -- Restart policy
+restartPolicy: OnFailure
+
+# -- Specify only on of the following concurrency policies: Allow, Forbid, Replace. Default is Allow
+concurrencyPolicy: Allow
+
+# -- Annotations to be added to the cronjob pods
+podAnnotations: {}
+
+# -- Labels to be added to the cronjob pods
+podLabels: {}
+
+serviceAccount:
+  # -- Create cronjob's service account
+  create: false
+  # -- Annotations applied to created service account
+  annotations: {}
+  # -- Create cronjob's service account name
+  name: ""
+
+# -- [Node selector]
+nodeSelector: {}
+
+# -- command
+command: []
+
+# -- args
+args: []
+
+# -- Environment variables to pass to cronjob
+env: []
+
+# -- envFrom to pass to cronjob
+envFrom: []
+
+# -- Resource limits and requests for the cronjob pods
+resources: {}
+
+# -- Additional volumeMounts to the cronjob main container
+volumeMounts: []
+
+# -- Additional volumes to the cronjob pod
+volumes: []
+
+# set this value to true to suspend a job
+suspend: false
+
+# -- Create a kubernetes secret resource from GSM
+secrets:
+  create: false
+  path: ""
+  target: {}
+

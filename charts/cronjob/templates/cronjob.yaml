@@ -1,0 +1,80 @@
+{{- $env := (include "cronjob.env" . | fromYaml) -}}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "cronjob.fullname" . }}
+  labels:
+    {{- include "cronjob.labels" . | nindent 4 }}
+    app.kubernetes.io/version: {{ default .Values.image.tag | quote }}
+spec:
+  schedule: {{ .Values.schedule | quote }}
+  concurrencyPolicy: {{ .Values.concurrencyPolicy }}
+  successfulJobsHistoryLimit: {{ .Values.historyLimit }}
+  failedJobsHistoryLimit: {{ .Values.historyLimit }}
+  suspend: {{ .Values.suspend }}
+  jobTemplate:
+    spec:
+      {{- if .Values.backoffLimit }}
+      backoffLimit: {{ .Values.backoffLimit }}
+      {{- end }}
+      template:
+        metadata:
+          {{- with .Values.podAnnotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          labels:
+            {{- include "cronjob.selectorLabels" . | nindent 12 }}
+        spec:
+          {{- if .Values.activeDeadlineSeconds }}
+          activeDeadlineSeconds: {{ .Values.activeDeadlineSeconds }}
+          {{- end }}
+          {{- if .Values.ttlSecondsAfterFinished }}
+          ttlSecondsAfterFinished: {{ .Values.ttlSecondsAfterFinished }}
+          {{- end }}
+          restartPolicy: {{ .Values.restartPolicy | default "OnFailure" }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          serviceAccountName: {{ include "cronjob.serviceAccountName" . }}
+          containers:
+            - name: job
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}"
+              imagePullPolicy: {{ .Values.image.imagePullPolicy }}
+              {{- if .Values.command }}
+              command:
+                {{- range .Values.command }}
+                - {{ . }}
+                {{- end }}
+              {{- end }}
+              {{- if .Values.args }}
+              args:
+                {{- range .Values.args }}
+                - {{ . }}
+                {{- end }}
+              {{- end }}
+              {{- if .Values.resources }}
+              resources:
+                {{- toYaml .Values.resources | nindent 16 }}
+              {{- end }}
+              {{- if $env }}
+              env:
+              {{- toYaml $env.env | nindent 16 }}
+              {{- end }}
+              {{- if .Values.envFrom }}
+              envFrom:
+                {{- toYaml .Values.envFrom | nindent 16 }}
+              {{- end }}
+              {{- if .Values.volumeMounts }}
+              volumeMounts:
+                {{- toYaml .Values.volumeMounts | nindent 16 }}
+              {{- end }}
+          {{- if .Values.volumes }}
+          volumes:
+            {{- toYaml .Values.volumes | nindent 12 }}
+          {{- end }}
