@@ -3,17 +3,17 @@ entries:
   base-service:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-10-31T14:39:37.964953013Z"
+    created: '2024-10-31T14:39:37.964953013Z'
     description: A Helm chart for Kubernetes
     digest: 154929257dfda5a2638fd1b07b3b76223cebb71d6afa37ff598fd4c1d98502ea
     name: base-service
     type: application
     urls:
-    - https://github.com/kitelabs-io/helm-charts/releases/download/base-service-0.1.7/base-service-0.1.7.tgz
+    - packages/base-service-0.1.7.tgz
     version: 0.1.7
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-07-23T10:53:21.926239379Z"
+    created: '2024-07-23T10:53:21.926239379Z'
     description: A Helm chart for Kubernetes
     digest: 988e8cb55f4dbb2c92cebca7f6272865ccca1ec3c51478e44e97d50ff6ebe91d
     name: base-service
@@ -23,12 +23,12 @@ entries:
     version: 0.1.6
   cronjob:
   - apiVersion: v2
-    created: "2024-10-31T14:39:38.090255973Z"
+    created: '2024-10-31T14:39:38.090255973Z'
     description: A Helm chart support create cronjob
     digest: 62e4294d3f48a6c7b7c82d093e3b95b85bafcba264af94d4f03881c88276c9dc
     name: cronjob
     type: application
     urls:
-    - https://github.com/kitelabs-io/helm-charts/releases/download/cronjob-0.1.7/cronjob-0.1.7.tgz
+    - packages/cronjob-0.1.7.tgz
     version: 0.1.7
-generated: "2024-10-31T14:39:38.090263918Z"
+generated: '2024-10-31T14:39:38.090263918Z'
